@@ -1,0 +1,44 @@
+[gd_scene load_steps=3 format=3 uid="uid://duvse10vls616"]
+
+[ext_resource type="Script" path="res://CardHandling/DeckRenderer.cs" id="1_bc5vo"]
+[ext_resource type="PackedScene" uid="uid://c2mownh1sx5ne" path="res://UIUtils/DefaultLabel.tscn" id="2_wlu60"]
+
+[node name="DeckRenderer" type="Control"]
+layout_mode = 3
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+grow_vertical = 2
+script = ExtResource("1_bc5vo")
+
+[node name="DrawPileLabel" parent="." instance=ExtResource("2_wlu60")]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 23.0
+offset_top = -66.0
+offset_right = 123.0
+offset_bottom = -43.0
+text = "deck: 0 cards"
+autowrap_mode = 0
+
+[node name="DiscardPileLabel" parent="." instance=ExtResource("2_wlu60")]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 1014.0
+offset_top = -66.0
+offset_right = 1135.0
+offset_bottom = -43.0
+text = "discard: 0 cards"
+autowrap_mode = 0
+
+[node name="CardPlayLogTemp" type="RichTextLabel" parent="."]
+unique_name_in_owner = true
+visible = false
+layout_mode = 0
+offset_left = 489.0
+offset_top = -163.0
+offset_right = 707.0
+offset_bottom = -123.0
+text = "Played card Example Card 2!"
+fit_content = true
+autowrap_mode = 0
