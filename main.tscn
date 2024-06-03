@@ -1,6 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://clalgyv1xn4vg"]
+[gd_scene load_steps=3 format=3 uid="uid://clalgyv1xn4vg"]
 
 [ext_resource type="Script" path="res://Main.cs" id="1_oohq6"]
+[ext_resource type="PackedScene" uid="uid://4f0qhwm3ifgc" path="res://Scenes/Grid.tscn" id="2_0hcqm"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_oohq6")
+
+[node name="Grid" parent="." instance=ExtResource("2_0hcqm")]
+
+[node name="Camera2D" type="Camera2D" parent="."]
