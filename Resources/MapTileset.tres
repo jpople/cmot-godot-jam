@@ -1,9 +1,9 @@
 [gd_resource type="TileSet" load_steps=3 format=3 uid="uid://525bbf0kf3t2"]
 
-[ext_resource type="Texture2D" uid="uid://mwxvcdokkr6" path="res://Assets/External Assets/isometric-sandbox-32x32/isometric-sandbox-sheet.png" id="1_ybqsy"]
+[ext_resource type="Texture2D" uid="uid://kql38q3v8mrv" path="res://Assets/External Assets/isometric-sandbox-32x32/isometric-sandbox-sheet.png" id="1_50gs8"]
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_15ynk"]
-texture = ExtResource("1_ybqsy")
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_44qex"]
+texture = ExtResource("1_50gs8")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
 1:0/0 = 0
@@ -57,4 +57,4 @@ texture_region_size = Vector2i(32, 32)
 [resource]
 tile_shape = 1
 tile_size = Vector2i(32, 32)
-sources/0 = SubResource("TileSetAtlasSource_15ynk")
+sources/1 = SubResource("TileSetAtlasSource_44qex")
