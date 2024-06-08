@@ -1,8 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://4f0qhwm3ifgc"]
+[gd_scene load_steps=5 format=3 uid="uid://4f0qhwm3ifgc"]
 
 [ext_resource type="TileSet" uid="uid://525bbf0kf3t2" path="res://Resources/MapTileset.tres" id="1_5oroj"]
-[ext_resource type="Script" path="res://Scripts/Gameboard.gd" id="2_b6d88"]
-[ext_resource type="Resource" uid="uid://jp05my6n5ojw" path="res://Resources/MainGrid.tres" id="3_ohfno"]
+[ext_resource type="Script" path="res://Scripts/Gameboard.cs" id="2_n2742"]
 [ext_resource type="Texture2D" uid="uid://cdfubw7d40bim" path="res://icon.svg" id="4_fao6e"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ga3l6"]
@@ -23,15 +22,14 @@ tile_set = ExtResource("1_5oroj")
 format = 2
 layer_0/tile_data = PackedInt32Array(65535, 0, 3, 0, 0, 3, 65536, 0, 6, 131071, 0, 6, -65539, 0, 3, -131070, 0, 3, -3, 0, 6, 65533, 0, 3, 131069, 0, 6, -65538, 0, 3, -65537, 0, 3, -131072, 0, 3, -131071, 0, 3, -2, 0, 6, 65534, 0, 3, 1, 0, 3, -65535, 0, 6, -65536, 0, 6, -1, 0, 6, 65537, 0, 6, 2, 0, 3, -65534, 0, 6, 65538, 0, 6, 131070, 0, 6, 131072, 0, 3, 131073, 0, 3, 131074, 0, 3, 196606, 0, 3, 196607, 0, 3, 196605, 0, 3, 262144, 262144, 0, 196608, 0, 6, 262145, 0, 0, 327680, 65536, 0, 393215, 65536, 0, 393214, 65536, 0, 393213, 65536, 0, 393212, 65536, 0, 327681, 65536, 0, 327682, 65536, 0, 262146, 65536, 0, 327679, 65536, 0, 327678, 65536, 0, 327677, 65536, 0, 262143, 0, 6, 262142, 0, 6, 262141, 0, 6, 262140, 0, 6, 196609, 0, 6, 196610, 0, 6, 131068, 0, 6, -4, 0, 6, -131075, 0, 6, -131074, 0, 6, -131073, 0, 6, -196608, 0, 6, -196607, 0, 6, -196606, 0, 6, -131076, 0, 6, -196611, 0, 3, -196610, 0, 3, -196609, 0, 3, -262144, 0, 3, -262143, 0, 3, -262142, 0, 3, -262141, 0, 3, -65540, 0, 3)
 
-[node name="Gameboard" type="Node2D" parent="." node_paths=PackedStringArray("cursor", "tilemap")]
-script = ExtResource("2_b6d88")
-grid = ExtResource("3_ohfno")
-cursor = NodePath("../Cursor")
+[node name="Gameboard" type="Node2D" parent="." node_paths=PackedStringArray("tilemap", "cursor")]
+script = ExtResource("2_n2742")
 tilemap = NodePath("../TileMap")
+cursor = NodePath("../Cursor")
 
 [node name="Cursor" type="Sprite2D" parent="."]
 position = Vector2(-78, -45)
 scale = Vector2(0.3, 0.3)
 texture = ExtResource("4_fao6e")
 
-[connection signal="input_event" from="MouseDetection_Area2D" to="Gameboard" method="_on_area_2d_input_event"]
+[connection signal="input_event" from="MouseDetection_Area2D" to="Gameboard" method="OnArea2DEntered"]
