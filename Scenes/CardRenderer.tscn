@@ -1,14 +1,14 @@
 [gd_scene load_steps=4 format=3 uid="uid://bbjvcwogk7lhf"]
 
-[ext_resource type="Theme" uid="uid://c0fc33o8qdlon" path="res://UIUtils/DefaultTheme.tres" id="1_0f5k8"]
-[ext_resource type="Script" path="res://CardHandling/CardRenderer.cs" id="2_k37sc"]
-[ext_resource type="PackedScene" uid="uid://c2mownh1sx5ne" path="res://UIUtils/DefaultLabel.tscn" id="3_3s7ut"]
+[ext_resource type="Theme" uid="uid://c0fc33o8qdlon" path="res://UIUtils/DefaultTheme.tres" id="1_s4nd3"]
+[ext_resource type="Script" path="res://Scripts/CardHandling/CardRenderer.cs" id="2_ecppc"]
+[ext_resource type="PackedScene" uid="uid://c2mownh1sx5ne" path="res://UIUtils/DefaultLabel.tscn" id="3_qs43x"]
 
 [node name="CardRenderer" type="PanelContainer" node_paths=PackedStringArray("titleLabel", "textLabel")]
 offset_right = 175.0
 offset_bottom = 225.0
-theme = ExtResource("1_0f5k8")
-script = ExtResource("2_k37sc")
+theme = ExtResource("1_s4nd3")
+script = ExtResource("2_ecppc")
 titleLabel = NodePath("MarginContainer/VBoxContainer/Title")
 textLabel = NodePath("MarginContainer/VBoxContainer/Text")
 
@@ -18,12 +18,12 @@ layout_mode = 2
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
 
-[node name="Title" parent="MarginContainer/VBoxContainer" instance=ExtResource("3_3s7ut")]
+[node name="Title" parent="MarginContainer/VBoxContainer" instance=ExtResource("3_qs43x")]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Card Title"
 
-[node name="Text" parent="MarginContainer/VBoxContainer" instance=ExtResource("3_3s7ut")]
+[node name="Text" parent="MarginContainer/VBoxContainer" instance=ExtResource("3_qs43x")]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Here is some card text.  Maybe it's a sentence or two long."
