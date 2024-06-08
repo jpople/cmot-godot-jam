@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="BuildingData" load_steps=2 format=3 uid="uid://cbb7w344h0x1y"]
+
+[ext_resource type="Script" path="res://Scripts/Buildings/BuildingData.cs" id="1_u6bnj"]
+
+[resource]
+script = ExtResource("1_u6bnj")
+Name = "House"
+Tier = 0
+DistrictType = 2
+CardDescription = "Someone lives here"

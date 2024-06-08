@@ -53,12 +53,14 @@ public class District{
         return false;
     }
 
+    protected virtual void CheckDistrictConditions(){
+    }
+
     void UpdateBuildings(){
+        CheckDistrictConditions();
+
         foreach(Building building in buildings){
             building.OnDistrictUpdated();
         }
     }
 }
-
-//TODO:
-// - Send event to Buildings on Add/Remove/Merge

@@ -10,6 +10,8 @@ public class Building{
 
     District governingDistrict = null;
 
+    public bool IsActive {get;set;} = false;
+
     public void SetGoverningDistrict(District newDistrict){
         //District merge takes care of removing the other district
         governingDistrict = newDistrict;

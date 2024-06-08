@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="DistrictData" load_steps=3 format=3 uid="uid://cstii27fkuc0a"]
+
+[ext_resource type="Script" path="res://Scripts/Buildings/DistrictData.cs" id="1_tr2j1"]
+[ext_resource type="Resource" uid="uid://drnc4w4d3rnt5" path="res://Resources/DistrictConditions/ResidentialCountCondition.tres" id="1_wflvf"]
+
+[resource]
+script = ExtResource("1_tr2j1")
+Name = ""
+LevelUpConditions = Array[Resource]([ExtResource("1_wflvf"), null])
