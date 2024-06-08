@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="DistrictLevelUpCondition" load_steps=2 format=3 uid="uid://drnc4w4d3rnt5"]
+
+[ext_resource type="Script" path="res://Scripts/Buildings/DistrictLevelUpCondition.cs" id="1_opuog"]
+
+[resource]
+script = ExtResource("1_opuog")
+type = 0
+countPerLevel = Array[int]([0, 1, 3, 5, 8])
