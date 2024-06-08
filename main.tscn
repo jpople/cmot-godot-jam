@@ -7,5 +7,8 @@
 script = ExtResource("1_oohq6")
 
 [node name="Grid" parent="." instance=ExtResource("2_0hcqm")]
+position = Vector2(290, -89)
 
 [node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(-296, -224)
+anchor_mode = 0
