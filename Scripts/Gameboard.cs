@@ -6,19 +6,30 @@ public partial class Gameboard : Node2D
 	
 	[Export] public TileMap tilemap;
 
-	[Export] Node2D cursor;
+	[Signal] public delegate void GridMouseMotionEventHandler( bool hasChangedCell, Vector2I cellPos, Vector2 globalPos );
+
+	public Vector2 HoveredCell { get; private set; }
 
 
-	// Called when the node enters the scene tree for the first time.
-	public override void _Ready()
+	// Return the center local pos of the cell the mouse is currently hovering on
+	public Vector2 GetMouseCurrentCellCenter()
 	{
+		Vector2 localMousePos = this.GetLocalMousePosition();
+		Vector2I mapPosition = tilemap.LocalToMap( localMousePos );
+		return tilemap.MapToLocal( mapPosition );
 	}
 
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	public override void _Process(double delta)
+
+	// Return the cell coordinate at the given position
+	public Vector2I LocalToCellPos( Vector2 localPosition )
 	{
+		return tilemap.LocalToMap( localPosition );
 	}
 
+/**
+	Because I can't get all the coordinate conversion right when listening from other objects, let the gameboard listen
+	to mouse motion, and re-propagate the signal with the conversion done and extra data.
+**/
 	private void OnArea2DEntered( Viewport viewport, InputEvent inputEvent, int shapeIdx )
 	{
 		InputEventMouseMotion mouseEvent = inputEvent as InputEventMouseMotion;
@@ -26,11 +37,14 @@ public partial class Gameboard : Node2D
 		if ( mouseEvent == null )
 			return;
 
-		Vector2 localMousePos = this.GetLocalMousePosition();
-		Vector2I mapPosition = tilemap.LocalToMap( localMousePos );
-		Vector2 tileCenter = tilemap.MapToLocal( mapPosition );
+		Vector2 localMousePos 		= this.GetLocalMousePosition();
+		Vector2I newHoveredCellPos 	= this.LocalToCellPos( localMousePos );
+		Vector2 cellCenterPos 		= GetMouseCurrentCellCenter();
+		bool hasChangedCell 		= HoveredCell == newHoveredCellPos;
 
-		cursor.Position = tileCenter;
+		HoveredCell = newHoveredCellPos;
+
+		EmitSignal(SignalName.GridMouseMotion, hasChangedCell, newHoveredCellPos, cellCenterPos );
 
 		return;
 	}
