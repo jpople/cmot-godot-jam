@@ -6,9 +6,9 @@ public struct Cell
 {
 	public Vector2I cellPos;
 	public Vector2 localCenter;
-	public BuildingData data;
+	public Building data;
 
-	public Cell( Vector2I cellPos, Vector2 localCenter, BuildingData data )
+	public Cell( Vector2I cellPos, Vector2 localCenter, Building data )
 	{
 		this.cellPos = cellPos;
 		this.localCenter = localCenter;
@@ -53,13 +53,21 @@ public partial class Gameboard : Node2D
 		return cell.data != null;
 	}
 
-	public bool AddBuilding( Vector2I cellPos, BuildingData buildingData )
+	public Building GetBuilding(Vector2I cellPos){
+		if(HasBuilding(cellPos)){
+			return Grid[cellPos].data;
+		}
+		return null;
+	}
+
+	public bool AddBuilding( Vector2I cellPos, Building building )
 	{
 		if ( HasBuilding( cellPos ) )
 			return false;
 
-		Cell newCell = new Cell( cellPos, tilemap.MapToLocal( cellPos ), buildingData );
+		Cell newCell = new Cell( cellPos, tilemap.MapToLocal( cellPos ), building );
 		Grid[ cellPos ] = newCell;
+		building.OnPlaced(cellPos, this);
 
 		// TODO : Get Sprite and Instantiate SpriteNode? Setting them directly into tilemap seems clunky.
 		// Placeholder : place a generic red tile
@@ -86,8 +94,9 @@ public partial class Gameboard : Node2D
 		if ( buttonEvent != null )
 		{
 			//Add a fake building for now
-			BuildingData data = new BuildingData();
-			AddBuilding( newHoveredCellPos, data );
+			BuildingData data = (BuildingData)GD.Load("res://Resources/Cards/House.tres");
+			Building building = new Building(data);
+			AddBuilding( newHoveredCellPos, building );
 
 			EmitSignal( SignalName.GridMouseButton, newHoveredCellPos, cellCenterPos );
 		}

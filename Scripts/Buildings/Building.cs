@@ -1,8 +1,16 @@
+using System.Collections.Generic;
 using Godot;
 
 public class Building{
     
-    Vector2 GridPosition{
+    public Building(){
+        
+    }
+    public Building(BuildingData buildingData){
+        districtType = buildingData.DistrictType;
+    }
+
+    Vector2I GridPosition{
         get;set;
     }
 
@@ -22,24 +30,24 @@ public class Building{
         //TODO: Add Building Status update here (checking activity conditions and such)
     }
 
-    void OnPlaced(Vector2 position){
+    public void OnPlaced(Vector2I position, Gameboard gameboard){
         GridPosition = position;
 
         //- Check card logic
-
-        //Iterate over [-1,0], [1,0], [0,-1], [0,1] for neighbors
+        //Iterate over neighbors, accounting for Isometric bullshit
+        Vector2I[] neighbors = { new Vector2I(-1,-1), new Vector2I(0,-1), new Vector2I(-1,1), new Vector2I(0,1) };
         for (int i = 0; i < 4; i++){
-            int xpos = (1-(i/2))*(i%2 * -1);
-            int ypos = (i/2)*(1-(i%2 * -1));
 
-            Building neighbor = /*Grid.GetBuilding(GridPosition.X-xpos, GridPosition.Y-ypos)*/new Building();
+            Building neighbor = gameboard.GetBuilding(GridPosition + neighbors[i]);
             if(neighbor != null){
                 if(neighbor.districtType == districtType){
                     if(neighbor.governingDistrict != null){
                         if(governingDistrict == null){
                             neighbor.governingDistrict.AddBuildingToDistrict(this);
-                        } else{
+                            GD.Print("Adding to existing District");
+                        } else if (governingDistrict != neighbor.governingDistrict){
                             governingDistrict.MergeDistricts(neighbor.governingDistrict);
+                            GD.Print("Merging District");
                         }
                     }
                 }
@@ -50,6 +58,7 @@ public class Building{
             new District(districtType, this);
         }
 
+        GD.Print("District: " + (governingDistrict != null ? governingDistrict.type.ToString() : "Null"));
     }
 }
 

@@ -17,12 +17,41 @@ public class District{
 
     public District(DistrictTypes newType, Building origin){
         type = newType;
+    
+        //Not sure I like this --Volv
+        string resource = "";
+        switch(type){
+        case DistrictTypes.Residential:
+            resource = "Residential";
+            break;
+        case DistrictTypes.Utility:
+            resource = "Utility";
+            break;
+        case DistrictTypes.Cultural:
+            resource = "Cultural";
+            break;
+        case DistrictTypes.Industrial:
+            resource = "Industrial";
+            break;
+        case DistrictTypes.Government:
+            resource = "Government";
+            break;
+        case DistrictTypes.Mercantile:
+            resource = "Mercantile";
+            break;
+
+        default:
+            break;
+        }
+        districtData = (DistrictData)GD.Load("res://Resources/Districts/"+resource+".tres");
+
         AddBuildingToDistrict(origin);
     }
     List<Building> buildings = new();
 
     int districtLevel = 0; 
 
+    DistrictData districtData;
 
     public DistrictTypes type = DistrictTypes.Undefined;
 
