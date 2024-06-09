@@ -60,6 +60,18 @@ public partial class Gameboard : Node2D
 		return null;
 	}
 
+	public List<Building> GetBuildings(List<Vector2I> cellPos){
+		List<Building> Out = new();
+
+		foreach(Vector2I pos in cellPos){
+			if (HasBuilding(pos)){
+				Out.Add(GetBuilding(pos));
+			}
+		}
+
+		return Out;
+	}
+
 	public bool AddBuilding( Vector2I cellPos, Building building )
 	{
 		if ( HasBuilding( cellPos ) )

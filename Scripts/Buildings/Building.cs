@@ -6,15 +6,16 @@ public class Building{
     public Building(){
         
     }
-    public Building(BuildingData buildingData){
-        districtType = buildingData.DistrictType;
+    public Building(BuildingData InBuildingData){
+        buildingData = InBuildingData;
     }
 
     Vector2I GridPosition{
         get;set;
     }
 
-    DistrictTypes districtType = DistrictTypes.Undefined;
+    BuildingData buildingData = null;
+    DistrictTypes DistrictType{get{ return buildingData != null ? buildingData.DistrictType : DistrictTypes.Undefined;} set{}}
 
     District governingDistrict = null;
 
@@ -32,15 +33,18 @@ public class Building{
 
     public void OnPlaced(Vector2I position, Gameboard gameboard){
         GridPosition = position;
-
+        GD.Print(GridPosition.ToString());
         //- Check card logic
         //Iterate over neighbors, accounting for Isometric bullshit
-        Vector2I[] neighbors = { new Vector2I(-1,-1), new Vector2I(0,-1), new Vector2I(-1,1), new Vector2I(0,1) };
-        for (int i = 0; i < 4; i++){
+        List<Vector2I> neighborCoords = new(){ new Vector2I(-1,0)+GridPosition, new Vector2I(1,0)+GridPosition, new Vector2I(0,-1)+GridPosition, new Vector2I(0,1)+GridPosition };
+        List<Building> neighbors = gameboard.GetBuildings(neighborCoords);
+        foreach(var item in neighbors){
+            GD.Print(item);
+        }
 
-            Building neighbor = gameboard.GetBuilding(GridPosition + neighbors[i]);
+        foreach(Building neighbor in neighbors){
             if(neighbor != null){
-                if(neighbor.districtType == districtType){
+                if(neighbor.DistrictType == DistrictType){
                     if(neighbor.governingDistrict != null){
                         if(governingDistrict == null){
                             neighbor.governingDistrict.AddBuildingToDistrict(this);
@@ -55,10 +59,14 @@ public class Building{
         }
 
         if(governingDistrict == null){
-            new District(districtType, this);
+            new District(DistrictType, this);
         }
 
         GD.Print("District: " + (governingDistrict != null ? governingDistrict.type.ToString() : "Null"));
+    }
+
+    public override string ToString() {
+        return buildingData.Name + " " + GridPosition.ToString();
     }
 }
 
